@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import configureStore from './configureStore';
-import App from './App';
+import { Environment } from './components/environment';
 import * as serviceWorker from './serviceWorker';
 
 const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Environment />
   </Provider>,
   document.getElementById('root')
 );

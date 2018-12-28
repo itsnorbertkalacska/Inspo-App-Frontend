@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Card, Loader, Title } from '../../atoms';
 import { InspoCard } from './Home.partials';
 
-import * as QuoteActions from '../../actions/quoteActions';
+import * as QuoteActions from '../../../actions/quoteActions';
 
 class Home extends React.PureComponent {
   componentDidMount() {

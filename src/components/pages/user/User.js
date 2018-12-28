@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Alert, Loader, Title } from '../../atoms';
 
-import * as UserActions from '../../actions/userActions';
+import * as UserActions from '../../../actions/userActions';
 
 class UserDetail extends React.PureComponent {
   componentDidMount() {

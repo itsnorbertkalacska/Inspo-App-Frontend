@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Form, withFormik } from 'formik';
 
 import { Alert, Button, ErrorMessage, FormGroup, Input } from '../../../atoms';
-import { loginFormValidationSchema } from '../../../validationSchemas';
+import { loginFormValidationSchema } from '../../../../validationSchemas';
 
-import * as UserActions from '../../../actions/userActions';
+import * as UserActions from '../../../../actions/userActions';
 
 const LoginForm = props => {
   return (
