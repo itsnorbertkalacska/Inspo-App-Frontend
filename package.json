@@ -3,15 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.6",
+    "formik": "^1.4.1",
+    "normalize.css": "^8.0.1",
+    "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.1"
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-observable": "^1.0.0",
+    "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.3.3",
+    "yup": "^0.26.6"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "npm run prettier -- --write",
+    "lint": "eslint src",
+    "prettier": "prettier \"src/**/*.+(js|jsx|json)\"",
+    "validate": "npm run lint && npm run prettier -- --list-different"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +37,18 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^1.2.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "react-test-renderer": "^16.7.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
