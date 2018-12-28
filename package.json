@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "inspo-app-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -50,5 +50,17 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  }
+  },
+  "description": "This is the frontend for an application that's aimed to bring inspiration for your every day life.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsnorbertkalacska/Inspo-App-Frontend.git"
+  },
+  "author": "Norbert Kalácska <hello@kalacskanorbert.me>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsnorbertkalacska/Inspo-App-Frontend/issues"
+  },
+  "homepage": "https://github.com/itsnorbertkalacska/Inspo-App-Frontend#readme"
 }
