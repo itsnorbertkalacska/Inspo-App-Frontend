@@ -7,4 +7,9 @@ const fetchQuotesFulfilled = payload => ({
   payload,
 });
 
-export { fetchQuotes, fetchQuotesFulfilled };
+const fetchQuotesRejected = payload => ({
+  type: ActionTypes.FETCH_QUOTES_REJECTED,
+  payload,
+});
+
+export { fetchQuotes, fetchQuotesFulfilled, fetchQuotesRejected };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Card, Loader, Title } from '../../atoms';
+import { Alert, Card, Loader, Title } from '../../atoms';
 import { InspoCard } from './Home.partials';
 
 import * as QuoteActions from '../../../actions/quoteActions';
@@ -13,11 +13,20 @@ class Home extends React.PureComponent {
     this.props.fetchQuotes();
   }
 
+  renderError() {
+    return (
+      <Alert type="danger">
+        An error occured while getting the quotes. Please refresh the page to
+        try again.
+      </Alert>
+    );
+  }
+
   renderEmptyState() {
     return (
       <Card>
         <p className="card-text">
-          There isn&lsquo;t any inspirational quotes... :( Click{' '}
+          There isn&lsquo;t any inspirational quotes yet. Click{' '}
           <Link to="">here</Link> to add one.
         </p>
       </Card>
@@ -28,6 +37,8 @@ class Home extends React.PureComponent {
     const { list } = this.props;
 
     if (list.loading) return <Loader />;
+
+    if (list.error) return this.renderError();
 
     if (list.data.length === 0) return this.renderEmptyState();
 
