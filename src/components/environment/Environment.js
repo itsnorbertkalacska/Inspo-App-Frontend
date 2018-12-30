@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import 'normalize.css';
 
-import { Header, Layout } from '../atoms';
+import { Layout } from '../atoms';
 import { About, Home, Login, UserDetail } from '../pages';
 
-import { Footer } from './Environment.partials';
+import { Footer, Header } from './Environment.partials';
 
 const Environment = () => (
   <Router>
