@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Form, withFormik } from 'formik';
+import { compose } from 'recompose';
 
 import { Alert, Button, ErrorMessage, FormGroup, Input } from '../../../atoms';
 import { loginFormValidationSchema } from '../../../../validationSchemas';
@@ -31,29 +32,33 @@ const LoginForm = props => {
 };
 
 LoginForm.propTypes = {
-  error: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   loading: PropTypes.bool,
   login: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => state.auth.login;
-const mapDispatchToProps = dispatch => ({
-  login: user => dispatch(UserActions.login(user)),
-});
+const enhance = compose(
+  connect(
+    ({
+      auth: {
+        login: { error, loading, login },
+      },
+    }) => ({ error, loading, login }),
+    dispatch => ({
+      login: user => dispatch(UserActions.login(user)),
+    })
+  ),
+  withFormik({
+    handleSubmit: (values, { props }) => {
+      props.login(values);
+    },
+    displayName: 'LoginForm',
+    mapPropsToValues: () => ({
+      username: '',
+      password: '',
+    }),
+    validationSchema: loginFormValidationSchema,
+  })
+);
 
-const EnchancedLoginForm = withFormik({
-  handleSubmit: (values, { props }) => {
-    props.login(values);
-  },
-  displayName: 'LoginForm',
-  mapPropsToValues: () => ({
-    username: '',
-    password: '',
-  }),
-  validationSchema: loginFormValidationSchema,
-})(LoginForm);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EnchancedLoginForm);
+export default enhance(LoginForm);
