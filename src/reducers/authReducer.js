@@ -7,7 +7,7 @@ const initialState = {
   },
   profile: {
     data: null,
-    loginStatus: false,
+    isLoggedIn: false,
   },
 };
 
@@ -32,7 +32,8 @@ export default function reducer(state = initialState, action) {
           loading: false,
         },
         profile: {
-          loginStatus: true,
+          ...state.profile,
+          isLoggedIn: true,
         },
       };
     }

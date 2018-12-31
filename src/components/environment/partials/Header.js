@@ -16,9 +16,9 @@ const Header = props => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <ul className="navbar-nav">
           {menuItems.map(item => {
-            if (props.profile.loginStatus === true && item.type === 'public')
+            if (props.profile.isLoggedIn === true && item.type === 'public')
               return null;
-            if (props.profile.loginStatus === false && item.type === 'private')
+            if (props.profile.isLoggedIn === false && item.type === 'private')
               return null;
 
             return (
@@ -37,7 +37,7 @@ const Header = props => {
 
 Header.propTypes = {
   profile: PropTypes.shape({
-    loginStatus: PropTypes.bool,
+    isLoggedIn: PropTypes.bool,
   }).isRequired,
 };
 

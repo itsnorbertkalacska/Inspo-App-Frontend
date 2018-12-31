@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import 'normalize.css';
 
-import { Layout } from '../atoms';
-import { About, Home, Login, NoMatch, UserDetail } from '../pages';
+import { Layout, PrivateRoute } from '../atoms';
+import { About, Home, Login, NoMatch, Profile, UserDetail } from '../pages';
 
 import { Footer, Header } from './Environment.partials';
 
@@ -19,6 +19,7 @@ const Environment = () => (
           <Route path="/about" exact component={About} />
           <Route path="/login" exact component={Login} />
           <Route path="/users/:id" exact component={UserDetail} />
+          <PrivateRoute path="/profile" exact component={Profile} />
           <Route component={NoMatch} />
         </Switch>
       </Layout>

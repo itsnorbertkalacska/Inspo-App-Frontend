@@ -2,6 +2,7 @@ import About from './about/About';
 import Home from './home/Home';
 import Login from './login/Login';
 import NoMatch from './noMatch/NoMatch';
+import Profile from './profile/Profile';
 import User from './user/User';
 
-export { About, Home, Login, NoMatch, User as UserDetail };
+export { About, Home, Login, NoMatch, Profile, User as UserDetail };
