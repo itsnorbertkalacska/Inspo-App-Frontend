@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import 'normalize.css';
 
 import { Layout } from '../atoms';
-import { About, Home, Login, UserDetail } from '../pages';
+import { About, Home, Login, NoMatch, UserDetail } from '../pages';
 
 import { Footer, Header } from './Environment.partials';
 
@@ -14,10 +14,13 @@ const Environment = () => (
       <Header />
 
       <Layout>
-        <Route path="/" exact component={Home} />
-        <Route path="/about" exact component={About} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/users/:id" exact component={UserDetail} />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/about" exact component={About} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/users/:id" exact component={UserDetail} />
+          <Route component={NoMatch} />
+        </Switch>
       </Layout>
 
       <Footer />
