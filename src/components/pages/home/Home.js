@@ -2,45 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { compose, lifecycle } from 'recompose';
 
 import { Alert, Card, Loader, Title } from '../../atoms';
 import { InspoCard } from './Home.partials';
 
 import * as QuoteActions from '../../../actions/quoteActions';
 
-class Home extends React.PureComponent {
-  componentDidMount() {
-    this.props.fetchQuotes();
-  }
+const Home = props => {
+  const { list } = props;
 
-  renderError() {
-    return (
-      <Alert type="danger">
-        An error occured while getting the quotes. Please refresh the page to
-        try again.
-      </Alert>
-    );
-  }
+  const renderError = () => (
+    <Alert type="danger">
+      An error occured while getting the quotes. Please refresh the page to try
+      again.
+    </Alert>
+  );
 
-  renderEmptyState() {
-    return (
-      <Card>
-        <p className="card-text">
-          There isn&lsquo;t any inspirational quotes yet. Click{' '}
-          <Link to="">here</Link> to add one.
-        </p>
-      </Card>
-    );
-  }
+  const renderEmptyState = () => (
+    <Card>
+      <p className="card-text">
+        There isn&lsquo;t any inspirational quotes yet. Click{' '}
+        <Link to="">here</Link> to add one.
+      </p>
+    </Card>
+  );
 
-  renderQuotesList() {
-    const { list } = this.props;
-
+  const renderQuotesList = () => {
     if (list.loading) return <Loader />;
 
-    if (list.error) return this.renderError();
+    if (list.error) return renderError();
 
-    if (list.data.length === 0) return this.renderEmptyState();
+    if (list.data.length === 0) return renderEmptyState();
 
     return list.data.map(quote => (
       <InspoCard
@@ -50,17 +43,15 @@ class Home extends React.PureComponent {
         user={quote.user}
       />
     ));
-  }
+  };
 
-  render() {
-    return (
-      <>
-        <Title title="Welcome, get some inspiration!" className="text-center" />
-        {this.renderQuotesList()}
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <Title title="Welcome, get some inspiration!" className="text-center" />
+      {renderQuotesList()}
+    </>
+  );
+};
 
 Home.propTypes = {
   fetchQuotes: PropTypes.func.isRequired,
@@ -70,12 +61,18 @@ Home.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = state => state.quote;
-const mapDispatchToProps = dispatch => ({
-  fetchQuotes: () => dispatch(QuoteActions.fetchQuotes()),
-});
+const enhance = compose(
+  connect(
+    ({ quote: { list } }) => ({ list }),
+    dispatch => ({
+      fetchQuotes: () => dispatch(QuoteActions.fetchQuotes()),
+    })
+  ),
+  lifecycle({
+    componentDidMount() {
+      this.props.fetchQuotes();
+    },
+  })
+);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default enhance(Home);
